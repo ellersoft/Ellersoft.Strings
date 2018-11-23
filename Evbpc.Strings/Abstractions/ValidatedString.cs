@@ -17,50 +17,50 @@ namespace Evbpc.Strings
         protected abstract string ErrorRequirement { get; }
         protected Exception Exception => new ArgumentException($"The value must {ErrorRequirement}");
         
-        public string String { get; private set; }
-        public int Length => String.Length;
-        public char this[int index] => String[index];
+        public string Value { get; private set; }
+        public int Length => Value.Length;
+        public char this[int index] => Value[index];
 
         protected ValidatedString() { }
         public ValidatedString(string str)
         {
-            String = Validate(str);
+            Value = Validate(str);
         }
         
         private string Validate(string str) => IsValid(str) ? str : throw Exception;
 
         protected abstract bool IsValid(string str);
 
-        public static implicit operator string(ValidatedString str) => str?.String;
-        public override bool Equals(object obj) => (String == null && obj == null) || (String?.Equals(obj) ?? false);
-        public override int GetHashCode() => String?.GetHashCode() ?? 0;
-        public override string ToString() => String?.ToString();
+        public static implicit operator string(ValidatedString str) => str?.Value;
+        public override bool Equals(object obj) => (Value == null && obj == null) || (Value?.Equals(obj) ?? false);
+        public override int GetHashCode() => Value?.GetHashCode() ?? 0;
+        public override string ToString() => Value?.ToString();
 
-        int IComparable.CompareTo(object obj) => (String == null && obj == null) ? 0 : ((IComparable)String)?.CompareTo(obj) ?? 0;
-        IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)String)?.GetEnumerator();
-        public IEnumerator<char> GetEnumerator() => ((IEnumerable<char>)String?.ToCharArray()).GetEnumerator();
-        public int CompareTo(string other) => (String == null && other == null) ? 0 : String?.CompareTo(other) ?? other.CompareTo(String);
-        public int CompareTo(ValidatedString other) => (String == null && other.String == null) ? 0 : String?.CompareTo(other.String) ?? other.String.CompareTo(String);
-        public bool Equals(string other) => (String == null && other == null) || (String?.Equals(other) ?? false);
-        public bool Equals(ValidatedString other) => (String == null && other.String == null) || (String?.Equals(other.String) ?? false);
+        int IComparable.CompareTo(object obj) => (Value == null && obj == null) ? 0 : ((IComparable)Value)?.CompareTo(obj) ?? 0;
+        IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)Value)?.GetEnumerator();
+        public IEnumerator<char> GetEnumerator() => ((IEnumerable<char>)Value?.ToCharArray()).GetEnumerator();
+        public int CompareTo(string other) => (Value == null && other == null) ? 0 : Value?.CompareTo(other) ?? other.CompareTo(Value);
+        public int CompareTo(ValidatedString other) => (Value == null && other.Value == null) ? 0 : Value?.CompareTo(other.Value) ?? other.Value.CompareTo(Value);
+        public bool Equals(string other) => (Value == null && other == null) || (Value?.Equals(other) ?? false);
+        public bool Equals(ValidatedString other) => (Value == null && other.Value == null) || (Value?.Equals(other.Value) ?? false);
         
-        public static bool operator ==(ValidatedString a, ValidatedString b) => a.String == b.String;
-        public static bool operator !=(ValidatedString a, ValidatedString b) => a.String != b.String;
+        public static bool operator ==(ValidatedString a, ValidatedString b) => a.Value == b.Value;
+        public static bool operator !=(ValidatedString a, ValidatedString b) => a.Value != b.Value;
 
-        public static int Compare(ValidatedString strA, ValidatedString strB) => string.Compare(strA.String, strB.String);
+        public static int Compare(ValidatedString strA, ValidatedString strB) => string.Compare(strA.Value, strB.Value);
         [SecuritySafeCritical]
-        public static int Compare(ValidatedString strA, ValidatedString strB, StringComparison comparisonType) => string.Compare(strA.String, strB.String, comparisonType);
-        public static int Compare(ValidatedString strA, int indexA, ValidatedString strB, int indexB, int length) => string.Compare(strA.String, indexA, strB.String, indexB, length);
+        public static int Compare(ValidatedString strA, ValidatedString strB, StringComparison comparisonType) => string.Compare(strA.Value, strB.Value, comparisonType);
+        public static int Compare(ValidatedString strA, int indexA, ValidatedString strB, int indexB, int length) => string.Compare(strA.Value, indexA, strB.Value, indexB, length);
         [SecuritySafeCritical]
-        public static int Compare(ValidatedString strA, int indexA, ValidatedString strB, int indexB, int length, StringComparison comparisonType) => string.Compare(strA.String, indexA, strB.String, indexB, length, comparisonType);
+        public static int Compare(ValidatedString strA, int indexA, ValidatedString strB, int indexB, int length, StringComparison comparisonType) => string.Compare(strA.Value, indexA, strB.Value, indexB, length, comparisonType);
 
-        public static int CompareOrdinal(ValidatedString strA, ValidatedString strB) => string.CompareOrdinal(strA.String, strB.String);
+        public static int CompareOrdinal(ValidatedString strA, ValidatedString strB) => string.CompareOrdinal(strA.Value, strB.Value);
         [SecuritySafeCritical]
-        public static int CompareOrdinal(ValidatedString strA, int indexA, ValidatedString strB, int indexB, int length) => string.CompareOrdinal(strA.String, indexA, strB.String, indexB, length);
+        public static int CompareOrdinal(ValidatedString strA, int indexA, ValidatedString strB, int indexB, int length) => string.CompareOrdinal(strA.Value, indexA, strB.Value, indexB, length);
 
-        public static bool Equals(ValidatedString a, ValidatedString b) => string.Equals(a.String, b.String);
+        public static bool Equals(ValidatedString a, ValidatedString b) => string.Equals(a.Value, b.Value);
         [SecuritySafeCritical]
-        public static bool Equals(ValidatedString a, ValidatedString b, StringComparison comparisonType) => string.Equals(a.String, b.String, comparisonType);
+        public static bool Equals(ValidatedString a, ValidatedString b, StringComparison comparisonType) => string.Equals(a.Value, b.Value, comparisonType);
 
         XmlSchema IXmlSerializable.GetSchema() => null;
         void IXmlSerializable.ReadXml(XmlReader reader)
@@ -72,12 +72,12 @@ namespace Evbpc.Strings
             {
                 value = reader.Value;
             }
-            String = Validate(value);
+            Value = Validate(value);
         }
 
         void IXmlSerializable.WriteXml(XmlWriter writer)
         {
-            writer.WriteValue(String);
+            writer.WriteValue(Value);
         }
     }
 }

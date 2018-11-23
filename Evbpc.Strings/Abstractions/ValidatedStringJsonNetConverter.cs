@@ -8,7 +8,7 @@ namespace Evbpc.Strings
     public class ValidatedStringJsonNetConverter : JsonConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) =>
-            writer.WriteValue((value as ValidatedString).String);
+            writer.WriteValue((value as ValidatedString).Value);
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) =>
             Activator.CreateInstance(objectType, reader.Value);
