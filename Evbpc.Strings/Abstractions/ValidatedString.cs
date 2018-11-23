@@ -15,7 +15,7 @@ namespace Evbpc.Strings
         : IComparable, IEnumerable, IEnumerable<char>, IComparable<string>, IComparable<ValidatedString>, IEquatable<string>, IEquatable<ValidatedString>, IXmlSerializable
     {
         protected abstract string ErrorRequirement { get; }
-        protected Exception Exception => new ArgumentException($"The value must {ErrorRequirement}");
+        protected virtual Exception Exception => new ArgumentException($"The value must {ErrorRequirement}");
         
         public string Value { get; private set; }
         public int Length => Value.Length;

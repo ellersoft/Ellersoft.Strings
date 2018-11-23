@@ -14,11 +14,17 @@ namespace Test
         protected override string ErrorRequirement => "be a valid email of the format <example>@<example>.<com>";
         protected override string RegexValidation => @"^.+@.+\..+$";
         protected override bool AllowNull => false;
+        protected override Exception Exception => new InvalidEmailException();
 
         protected StringEmail() { }
         public StringEmail(string str) : base(str) { }
 
         public static explicit operator StringEmail(string str) => new StringEmail(str);
+
+        public class InvalidEmailException : FormatException
+        {
+            public InvalidEmailException() : base("The email provided was an invalid format.") { }
+        }
     }
 
     public class String10 : StringWhitelist_N
@@ -93,6 +99,15 @@ namespace Test
             var jsonResult = JsonConvert.SerializeObject(test);
             Console.WriteLine(jsonResult);
             Console.WriteLine(JsonConvert.DeserializeObject<Test>(jsonResult).Email);
+
+            try
+            {
+                test = new Test() { Email = (StringEmail)"ebrown@example." }; // Purposefully throw exception
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
             
             Console.ReadLine();
         }
