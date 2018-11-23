@@ -75,6 +75,8 @@ namespace Test
             _testStringAlphaNum("123Abc ");
 
             var test = new Test() { Email = (StringEmail)"ebrown@example.com" };
+            Console.WriteLine(test.Email == "ebrown@example.com");
+            Console.WriteLine(test.Email == "ebrown2@example.com");
             var xmlSer = new XmlSerializer(test.GetType());
             byte[] buffer;
             using (var ms = new System.IO.MemoryStream())
