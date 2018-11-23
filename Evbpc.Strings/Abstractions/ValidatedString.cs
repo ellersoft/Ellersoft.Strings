@@ -38,7 +38,7 @@ namespace Evbpc.Strings
 
         int IComparable.CompareTo(object obj) => (Value == null && obj == null) ? 0 : ((IComparable)Value)?.CompareTo(obj) ?? 0;
         IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)Value)?.GetEnumerator();
-        public IEnumerator<char> GetEnumerator() => ((IEnumerable<char>)Value?.ToCharArray()).GetEnumerator();
+        public IEnumerator<char> GetEnumerator() => ((IEnumerable<char>)Value)?.GetEnumerator();
         public int CompareTo(string other) => (Value == null && other == null) ? 0 : Value?.CompareTo(other) ?? other.CompareTo(Value);
         public int CompareTo(ValidatedString other) => (Value == null && other.Value == null) ? 0 : Value?.CompareTo(other.Value) ?? other.Value.CompareTo(Value);
         public bool Equals(string other) => (Value == null && other == null) || (Value?.Equals(other) ?? false);
