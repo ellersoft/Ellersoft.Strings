@@ -67,8 +67,12 @@ namespace Evbpc.Strings
         {
             var isEmpty = reader.IsEmptyElement;
             reader.Read();
-            if (isEmpty) return;
-            String = Validate(reader.Value);
+            string value = null;
+            if (!isEmpty)
+            {
+                value = reader.Value;
+            }
+            String = Validate(value);
         }
 
         void IXmlSerializable.WriteXml(XmlWriter writer)
