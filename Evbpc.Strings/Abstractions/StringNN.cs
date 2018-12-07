@@ -5,7 +5,7 @@ using System.Text;
 namespace Evbpc.Strings
 {
     public abstract class StringNN
-        : RegexString
+        : StringRegex
     {
         protected abstract int MinLength { get; }
         protected abstract int MaxLength { get; }

@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 
 namespace Test
 {
-    public class StringEmail : RegexString
+    public class StringEmail : StringRegex
     {
         protected override string ErrorRequirement => "be a valid email of the format <example>@<example>.<com>";
         protected override string RegexValidation => @"^.+@.+\..+$";
@@ -45,7 +45,7 @@ namespace Test
 
     class Program
     {
-        static void _try(string str, Func<ValidatedString> initializer)
+        static void _try(string str, Func<StringValidated> initializer)
         {
             try
             {

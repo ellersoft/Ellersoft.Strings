@@ -5,7 +5,7 @@ using System.Text;
 namespace Evbpc.Strings
 {
     public class StringAlphaNum
-        : RegexString
+        : StringRegex
     {
         protected override string RegexValidation => "^[a-zA-Z0-9]*$";
         protected override string ErrorRequirement => "contain only alphabetical (a-z) or numeric (0-9) characters";

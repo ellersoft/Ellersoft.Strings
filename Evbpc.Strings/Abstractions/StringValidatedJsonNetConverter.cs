@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Evbpc.Strings
 {
-    public class ValidatedStringJsonNetConverter : JsonConverter
+    public class StringValidatedJsonNetConverter : JsonConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) =>
-            writer.WriteValue((value as ValidatedString).Value);
+            writer.WriteValue((value as StringValidated).Value);
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) =>
             Activator.CreateInstance(objectType, reader.Value);
@@ -18,7 +18,7 @@ namespace Evbpc.Strings
 #if NETSTANDARD_1_0
             try
             {
-                return Activator.CreateInstance(objectType) is ValidatedString;
+                return Activator.CreateInstance(objectType) is StringValidated;
             }
             catch
             {

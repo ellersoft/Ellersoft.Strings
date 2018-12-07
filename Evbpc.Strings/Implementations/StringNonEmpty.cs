@@ -4,15 +4,15 @@ using System.Text;
 
 namespace Evbpc.Strings
 {
-    public class NonEmptyString
-        : ValidatedString
+    public class StringNonEmpty
+        : StringValidated
     {
         protected override string ErrorRequirement => "not be null, empty, or whitespace";
 
-        protected NonEmptyString() { }
-        public NonEmptyString(string str) : base(str) { }
+        protected StringNonEmpty() { }
+        public StringNonEmpty(string str) : base(str) { }
 
         protected override bool IsValid(string str) => !string.IsNullOrWhiteSpace(str);
-        public static explicit operator NonEmptyString(string str) => new NonEmptyString(str);
+        public static explicit operator StringNonEmpty(string str) => new StringNonEmpty(str);
     }
 }

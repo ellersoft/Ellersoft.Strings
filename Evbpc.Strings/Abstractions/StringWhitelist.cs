@@ -5,7 +5,7 @@ using System.Text;
 namespace Evbpc.Strings
 {
     public abstract class StringWhitelist
-        : RegexString
+        : StringRegex
     {
         private const string _special = @"[\^$.|?*+()";
 

@@ -5,7 +5,7 @@ using System.Text;
 namespace Evbpc.Strings
 {
     public class StringNum
-        : RegexString
+        : StringRegex
     {
         protected override string RegexValidation => "^[0-9]*$";
         protected override string ErrorRequirement => "contain only numeric (0-9) characters";

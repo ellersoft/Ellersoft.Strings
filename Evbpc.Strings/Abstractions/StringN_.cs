@@ -5,7 +5,7 @@ using System.Text;
 namespace Evbpc.Strings
 {
     public abstract class StringN_
-        : RegexString
+        : StringRegex
     {
         protected abstract int MinLength { get; }
         protected override string RegexValidation => $"^.{{{MinLength},}}$";

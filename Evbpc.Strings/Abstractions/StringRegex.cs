@@ -3,8 +3,8 @@ using System.Text.RegularExpressions;
 
 namespace Evbpc.Strings
 {
-    public abstract class RegexString
-        : ValidatedString
+    public abstract class StringRegex
+        : StringValidated
     {
         protected abstract string RegexValidation { get; }
         protected abstract bool AllowNull { get; }
@@ -12,8 +12,8 @@ namespace Evbpc.Strings
 
         private Regex _regex;
 
-        protected RegexString() { }
-        public RegexString(string str) : base(str) { }
+        protected StringRegex() { }
+        public StringRegex(string str) : base(str) { }
 
         protected override bool IsValid(string str)
         {
