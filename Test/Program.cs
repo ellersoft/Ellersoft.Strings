@@ -30,7 +30,7 @@ namespace Test
     public class String10 : StringWhitelist_N
     {
         protected override int MaxLength => 10;
-        protected override char[] Whitelist => new [] {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+        protected override char[] Whitelist => new[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 
         public String10(string str) : base(str)
         {
@@ -45,18 +45,32 @@ namespace Test
 
     class Program
     {
-        static void _try(string str, Func<StringValidated> initializer)
+        static int _counter = 0;
+        static void _try(Action func, Action<Exception> failure = null)
         {
+            _counter++;
+            Console.Write($"Attempt {_counter}: ");
+
             try
             {
-                var result = initializer();
-                Console.WriteLine($"Success: {result}");
+                func();
             }
-            catch (ArgumentException e)
+            catch (Exception e)
             {
-                Console.WriteLine($"Failed ({str}): {e.Message}");
+                if (failure == null)
+                {
+                    Console.WriteLine("Try failed: " + e.ToString());
+                }
+                else
+                {
+                    failure(e);
+                }
             }
         }
+        static void _try(string str, Func<StringValidated> initializer) =>
+            _try(
+                () => { var result = initializer(); Console.WriteLine($"Success: {result}"); },
+                (e) => Console.WriteLine($"Failed ({str}): {e.Message}"));
 
         static void _testString10(string str) => _try(str, () => new String10(str));
         static void _testStringHexPrefix(string str) => _try(str, () => new StringHexPrefix(str));
@@ -81,34 +95,42 @@ namespace Test
             _testStringAlphaNum("123Abc ");
 
             var test = new Test() { Email = (StringEmail)"ebrown@example.com" };
-            Console.WriteLine(test.Email == "ebrown@example.com");
-            Console.WriteLine(test.Email == "ebrown2@example.com");
-            var xmlSer = new XmlSerializer(test.GetType());
-            byte[] buffer;
-            using (var ms = new System.IO.MemoryStream())
-            {
-                xmlSer.Serialize(ms, test);
-                buffer = ms.GetBuffer();
-            }
-            Console.WriteLine(new UTF8Encoding(false).GetString(buffer));
-            using (var ms = new System.IO.MemoryStream(buffer))
-            {
-                var result = (Test)xmlSer.Deserialize(ms);
-                Console.WriteLine(result.Email);
-            }
-            var jsonResult = JsonConvert.SerializeObject(test);
-            Console.WriteLine(jsonResult);
-            Console.WriteLine(JsonConvert.DeserializeObject<Test>(jsonResult).Email);
+            _try(() => Console.WriteLine((test.Email == "ebrown@example.com") + " (true)"));
+            _try(() => Console.WriteLine((test.Email == "ebrown2@example.com") + " (false)"));
 
-            try
+            var xmlSer = new XmlSerializer(test.GetType());
+            byte[] buffer = null;
+
+            _try(() =>
             {
-                test = new Test() { Email = (StringEmail)"ebrown@example." }; // Purposefully throw exception
-            }
-            catch (Exception ex)
+                using (var ms = new System.IO.MemoryStream())
+                {
+                    xmlSer.Serialize(ms, test);
+                    buffer = ms.GetBuffer();
+                }
+                Console.WriteLine(new UTF8Encoding(false).GetString(buffer));
+            });
+            _try(() =>
             {
-                Console.WriteLine(ex.ToString());
-            }
-            
+                using (var ms = new System.IO.MemoryStream(buffer))
+                {
+                    var result = (Test)xmlSer.Deserialize(ms);
+                    Console.WriteLine(result.Email);
+                }
+            });
+
+            string jsonResult = null;
+
+            _try(() =>
+            {
+                jsonResult = JsonConvert.SerializeObject(test);
+                Console.WriteLine(jsonResult);
+                Console.WriteLine(JsonConvert.DeserializeObject<Test>(jsonResult).Email);
+            });
+            _try(() => { Console.WriteLine("ebrown@example."); test = new Test() { Email = (StringEmail)"ebrown@example." }; /* Purposefully throw exception */ });
+            _try(() => { jsonResult = JsonConvert.SerializeObject(test).Replace("ebrown@example.com", "ebrown@example."); Console.WriteLine(jsonResult); Console.WriteLine(JsonConvert.DeserializeObject<Test>(jsonResult).Email); /* Purposefully throw exception */ });
+
+            Console.WriteLine("Tests done.");
             Console.ReadLine();
         }
     }
