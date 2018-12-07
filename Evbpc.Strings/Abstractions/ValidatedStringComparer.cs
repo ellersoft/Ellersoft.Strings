@@ -4,9 +4,10 @@ using System.Text;
 
 namespace Evbpc.Strings.Abstractions
 {
-    public class ValidatedStringComparer : IEqualityComparer<ValidatedString>
+    public class ValidatedStringComparer : IEqualityComparer<ValidatedString>, IComparer<ValidatedString>
     {
-        public bool Equals(ValidatedString x, ValidatedString y) => x.Equals(y);
-        public int GetHashCode(ValidatedString obj) => obj.GetHashCode();
+        bool IEqualityComparer<ValidatedString>.Equals(ValidatedString x, ValidatedString y) => x.Equals(y);
+        int IEqualityComparer<ValidatedString>.GetHashCode(ValidatedString obj) => obj.GetHashCode();
+        int IComparer<ValidatedString>.Compare(ValidatedString strA, ValidatedString strB) => ValidatedString.Compare(strA, strB);
     }
 }
