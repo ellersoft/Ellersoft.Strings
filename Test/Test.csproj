@@ -60,9 +60,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Evbpc.Strings\Evbpc.Strings.csproj">
-      <Project>{0626FD7F-F56F-480A-A65E-2411C572E468}</Project>
-      <Name>Evbpc.Strings</Name>
+    <ProjectReference Include="..\Ellersoft.Strings\Ellersoft.Strings.csproj">
+      <Project>{0626fd7f-f56f-480a-a65e-2411c572e468}</Project>
+      <Name>Ellersoft.Strings</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Evbpc.Strings
+namespace Ellersoft.Strings
 {
     public class StringValidatedJsonNetConverter : JsonConverter
     {

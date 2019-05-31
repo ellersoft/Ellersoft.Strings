@@ -1,4 +1,4 @@
-﻿using Evbpc.Strings;
+﻿using Ellersoft.Strings;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

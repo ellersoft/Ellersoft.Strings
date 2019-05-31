@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28306.52
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Evbpc.Strings", "Evbpc.Strings\Evbpc.Strings.csproj", "{0626FD7F-F56F-480A-A65E-2411C572E468}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ellersoft.Strings", "Ellersoft.Strings\Ellersoft.Strings.csproj", "{0626FD7F-F56F-480A-A65E-2411C572E468}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{1DA267B6-AA01-4B34-AA87-952134E47C4B}"
 EndProject

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Evbpc.Strings.Abstractions
+namespace Ellersoft.Strings.Abstractions
 {
     public class StringValidatedComparer : IEqualityComparer<StringValidated>, IComparer<StringValidated>
     {

@@ -1,4 +1,4 @@
-Evbpc.Strings
+Ellersoft.Strings
 ===
 
 A type-safe string validation framework.

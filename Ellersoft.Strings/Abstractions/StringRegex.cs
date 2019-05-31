@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace Evbpc.Strings
+namespace Ellersoft.Strings
 {
     public abstract class StringRegex
         : StringValidated
