@@ -9,7 +9,7 @@ namespace Ellersoft.Strings
     {
         protected abstract int MinLength { get; }
         protected override string RegexValidation => $"^.{{{MinLength},}}$";
-        protected override string ErrorRequirement => $"be no less than {MinLength} characters";
+        protected override string ErrorRequirement => $"The value must be no less than {MinLength} characters";
         protected override bool AllowNull => true;
 
         protected StringN_() { }

@@ -11,7 +11,7 @@ namespace Ellersoft.Strings
 
         protected abstract char[] Whitelist { get; }
         protected override string RegexValidation => $"^[{CreateWhitelist(Whitelist)}]*$";
-        protected override string ErrorRequirement => $"contain only the whitelisted characters: {CreateWhitelist(Whitelist)}";
+        protected override string ErrorRequirement => $"The value must contain only the whitelisted characters: {CreateWhitelist(Whitelist)}";
         protected override bool AllowNull => true;
 
         protected StringWhitelist() { }

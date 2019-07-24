@@ -8,7 +8,7 @@ namespace Ellersoft.Strings
         : StringRegex
     {
         protected override string RegexValidation => "^(0x|&H)?[0-9a-fA-F]*$";
-        protected override string ErrorRequirement => "be a hexadecimal number (optional 0x or &H prefix)";
+        protected override string ErrorRequirement => "The value must be a hexadecimal number (optional 0x or &H prefix)";
         protected override bool AllowNull => true;
 
         protected StringHexPrefix() { }

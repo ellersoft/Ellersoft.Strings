@@ -9,7 +9,7 @@ namespace Ellersoft.Strings
     {
         protected abstract int MaxLength { get; }
         protected override string RegexValidation => $"^.{{0,{MaxLength}}}$";
-        protected override string ErrorRequirement => $"be no more than {MaxLength} characters";
+        protected override string ErrorRequirement => $"The value must be no more than {MaxLength} characters";
         protected override bool AllowNull => true;
 
         protected String_N() { }

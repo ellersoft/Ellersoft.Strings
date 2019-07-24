@@ -8,7 +8,7 @@ namespace Ellersoft.Strings
     {
         protected abstract string RegexValidation { get; }
         protected abstract bool AllowNull { get; }
-        protected override string ErrorRequirement => $"match the Regular Expression: {RegexValidation}";
+        protected override string ErrorRequirement => $"The value must match the Regular Expression: {RegexValidation}";
 
         private Regex _regex;
 

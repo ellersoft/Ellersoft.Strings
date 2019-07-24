@@ -7,7 +7,7 @@ namespace Ellersoft.Strings
     public class StringNonEmpty
         : StringValidated
     {
-        protected override string ErrorRequirement => "not be null, empty, or whitespace";
+        protected override string ErrorRequirement => "The value must not be null, empty, or whitespace";
 
         protected StringNonEmpty() { }
         public StringNonEmpty(string str) : base(str) { }

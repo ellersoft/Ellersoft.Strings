@@ -8,7 +8,7 @@ namespace Ellersoft.Strings
         : StringRegex
     {
         protected override string RegexValidation => "^[0-9a-fA-F]*$";
-        protected override string ErrorRequirement => "be a hexadecimal number";
+        protected override string ErrorRequirement => "The value must be a hexadecimal number";
         protected override bool AllowNull => true;
 
         protected StringHex() { }

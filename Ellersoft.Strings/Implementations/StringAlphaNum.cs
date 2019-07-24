@@ -8,7 +8,7 @@ namespace Ellersoft.Strings
         : StringRegex
     {
         protected override string RegexValidation => "^[a-zA-Z0-9]*$";
-        protected override string ErrorRequirement => "contain only alphabetical (a-z) or numeric (0-9) characters";
+        protected override string ErrorRequirement => "The value must contain only alphabetical (a-z) or numeric (0-9) characters";
         protected override bool AllowNull => true;
 
         protected StringAlphaNum() { }
