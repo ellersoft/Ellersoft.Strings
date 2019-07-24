@@ -57,8 +57,8 @@ namespace Ellersoft.Strings
         public bool Equals(string other) => (Value == null && other == null) || (Value?.Equals(other) ?? false);
         public bool Equals(StringValidated other) => (Value == null && other.Value == null) || (Value?.Equals(other.Value) ?? false);
         
-        public static bool operator ==(StringValidated a, StringValidated b) => a.Value == b.Value;
-        public static bool operator !=(StringValidated a, StringValidated b) => a.Value != b.Value;
+        public static bool operator ==(StringValidated a, StringValidated b) => a?.Value == b?.Value;
+        public static bool operator !=(StringValidated a, StringValidated b) => a?.Value != b?.Value;
 
         public static int Compare(StringValidated strA, StringValidated strB) =>
             // ReSharper disable once StringCompareIsCultureSpecific.1
